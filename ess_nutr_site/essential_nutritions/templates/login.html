@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Please Log In</title>
+    {% load staticfiles %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" />
+{% endblock title %}
+
+{% block body_content %}
+
+    {% if form.errors %}
+        <p class="text-warning">Please enter correct username and password!</p>
+    {% endif %}
+
+ <div class="container">
+   <form class="form-signin" method="post">
+   {% csrf_token %}
+        <h2 class="form-signin-heading">Please log in</h2>
+
+        <label for="inputUsername" class="sr-only">User name</label>
+        <input type="text" id="inputUsername" class="form-control" name="username" placeholder="User name" required >
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="rememberme" value="remember-me">Remember me</label>
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="hidden" name="submit" value="{{ next }}" />
+      </form>
+</div>
+{% endblock body_content %}
